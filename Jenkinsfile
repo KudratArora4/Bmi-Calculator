@@ -11,7 +11,7 @@ pipeline {
             steps {
                 echo 'Building the application using npm install [Other Tools: Maven, Gradle, yarn]'
                 //[Other Available Tools for various project types --> Maven, Gradle, yarn]
-                sh 'mkdir -p logs && echo "Build process completed" > logs/build.log'
+                
             }
         }
 
@@ -19,7 +19,7 @@ pipeline {
             steps {
                 echo 'Running unit and integration tests using Jest'
                 //[Other Available Tools for various project types -->  JUnit, TestNG, Mocha]
-                sh 'echo "Unit and integration tests executed" > logs/tests.log'
+                
             }
             post {
                 success {
