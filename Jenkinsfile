@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building the application using npm install'
+                echo 'Building the application using npm install [Other Tools: Maven, Gradle, yarn]'
                 //[Other Available Tools for various project types --> Maven, Gradle, yarn]
                 sh 'mkdir -p logs && echo "Build process completed" > logs/build.log'
             }
@@ -26,15 +26,13 @@ pipeline {
                     archiveArtifacts artifacts: '**/logs/*.log', fingerprint: true
                     mail to: 'kudratskarora@gmail.com',
                          subject: 'Unit and Integration Tests Passed - BMI Calculator',
-                         body: 'The unit and integration tests completed successfully',
-                         attachLog: true
+                         body: 'The unit and integration tests completed successfully. Logs are available in Jenkins.'
                 }
                 failure {
                     archiveArtifacts artifacts: '**/logs/*.log', fingerprint: true
                     mail to: 'kudratskarora@gmail.com',
                          subject: 'Unit and Integration Tests Failed - BMI Calculator',
-                         body: 'The unit and integration tests failed. Please check the logs',
-                         attachLog: true
+                         body: 'The unit and integration tests failed. Please check the logs in Jenkins.'
                 }
             }
         }
@@ -58,15 +56,13 @@ pipeline {
                     archiveArtifacts artifacts: '**/logs/*.log', fingerprint: true
                     mail to: 'kudratskarora@gmail.com',
                          subject: 'Security Scan Passed - BMI Calculator',
-                         body: 'The security scan completed successfully',
-                         attachLog: true
+                         body: 'The security scan completed successfully. Logs are available in Jenkins.'
                 }
                 failure {
                     archiveArtifacts artifacts: '**/logs/*.log', fingerprint: true
                     mail to: 'kudratskarora@gmail.com',
                          subject: 'Security Scan Failed - BMI Calculator',
-                         body: 'The security scan failed. Please check the logs',
-                         attachLog: true
+                         body: 'The security scan failed. Please check the logs in Jenkins.'
                 }
             }
         }
@@ -100,14 +96,12 @@ pipeline {
         success {
             mail to: 'kudratskarora@gmail.com',
                  subject: 'Jenkins Pipeline Success - BMI Calculator',
-                 body: 'The pipeline has completed successfully.',
-                 attachLog: true
+                 body: 'The pipeline has completed successfully. Logs are available in Jenkins.'
         }
         failure {
             mail to: 'kudratskarora@gmail.com',
                  subject: 'Jenkins Pipeline Failure - BMI Calculator',
-                 body: 'The pipeline has failed. Check Jenkins logs for details.',
-                 attachLog: true
+                 body: 'The pipeline has failed. Check Jenkins logs for details.'
         }
     }
 }
