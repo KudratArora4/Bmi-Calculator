@@ -23,13 +23,13 @@ pipeline {
             }
             post {
                 success {
-                    archiveArtifacts artifacts: '**/logs/*.log', fingerprint: true
+                    //archiveArtifacts artifacts: '**/logs/*.log', fingerprint: true
                     mail to: 'kudratskarora@gmail.com',
                          subject: 'Unit and Integration Tests Passed - BMI Calculator',
                          body: 'The unit and integration tests completed successfully. Logs are available in Jenkins.'
                 }
                 failure {
-                    archiveArtifacts artifacts: '**/logs/*.log', fingerprint: true
+                    //archiveArtifacts artifacts: '**/logs/*.log', fingerprint: true
                     mail to: 'kudratskarora@gmail.com',
                          subject: 'Unit and Integration Tests Failed - BMI Calculator',
                          body: 'The unit and integration tests failed. Please check the logs in Jenkins.'
@@ -41,7 +41,7 @@ pipeline {
             steps {
                   echo 'Performing code analysis using SonarQube'
                   //[Other Available Tools for various project types --> ESLint, Checkstyle]
-                  sh 'echo "Code analysis completed" > logs/code_analysis.log'
+                  
             }
         }
 
@@ -49,17 +49,17 @@ pipeline {
             steps {
                 echo 'Performing security scan using OWASP ZAP'
                 //[Other Available Tools for various project types --> Snyk, Dependency-Check]
-                sh 'echo "Security scan completed" > logs/security_scan.log'
+                //sh 'echo "Security scan completed" > logs/security_scan.log'
             }
             post {
                 success {
-                    archiveArtifacts artifacts: '**/logs/*.log', fingerprint: true
+                    //archiveArtifacts artifacts: '**/logs/*.log', fingerprint: true
                     mail to: 'kudratskarora@gmail.com',
                          subject: 'Security Scan Passed - BMI Calculator',
                          body: 'The security scan completed successfully. Logs are available in Jenkins.'
                 }
                 failure {
-                    archiveArtifacts artifacts: '**/logs/*.log', fingerprint: true
+                    //archiveArtifacts artifacts: '**/logs/*.log', fingerprint: true
                     mail to: 'kudratskarora@gmail.com',
                          subject: 'Security Scan Failed - BMI Calculator',
                          body: 'The security scan failed. Please check the logs in Jenkins.'
@@ -71,7 +71,7 @@ pipeline {
             steps {
                 echo "Deploying application to staging environment using ${env.STAGING_ENV} "
                 //[Other Available Tools for various project types --> Docker, Kubernetes]
-                sh 'echo "Deployed to staging" > logs/deploy_staging.log'
+                //sh 'echo "Deployed to staging" > logs/deploy_staging.log'
             }
         }
 
@@ -79,7 +79,7 @@ pipeline {
             steps {
                 echo 'Running integration tests on staging environment using Cypress'
                 //[Other Available Tools for various project types --> Selenium, Postman, JMeter]
-                sh 'echo "Integration tests on staging completed" > logs/integration_staging.log'
+                //sh 'echo "Integration tests on staging completed" > logs/integration_staging.log'
             }
         }
 
@@ -87,7 +87,7 @@ pipeline {
             steps {
                 echo "Deploying application to production environment using ${env.PRODUCTION_ENV}"
                 //[Other Available Tools for various project types --> Docker, Kubernetes, Azure App Services]
-                sh 'echo "Deployed to production" > logs/deploy_production.log'
+                //sh 'echo "Deployed to production" > logs/deploy_production.log'
             }
         }
     }
